@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://js.stripe.com/v3/"></script>
+    <title>Nauticshop - Tienda de Artículos Náuticos</title>
+</head>
+    
+<body>
+    <!-- Encabezado -->
+    <header id="header">
+        <div class="container header-content">
+            <div class="logo">Nautic<span>shop</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active" id="home-link">Inicio</a></li>
+                    <li><a href="#about-us">Sobre Nosotros</a></li>
+                    <li><a href="#categories">Categorías</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <button class="btn btn-secondary" id="loginBtn">Iniciar Sesión</button>
+                <button class="btn btn-primary" id="registerBtn">Registrarse</button>
+                <div class="cart-icon" id="cartIcon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                    <!-- Dropdown del carrito -->
+                    <div class="cart-dropdown" id="cartDropdown">
+                        <div class="cart-header">
+                            <div class="cart-title">Mi Carrito</div>
+                            <div class="cart-close" id="cartClose"><i class="fas fa-times"></i></div>
+                        </div>
+                        <div class="cart-items" id="cartItems">
+                            <!-- Los items del carrito se generarán dinámicamente con JS -->
+                            <div class="cart-empty" id="cartEmpty">
+                                <i class="fas fa-shopping-basket"></i>
+                                <p>Tu carrito está vacío</p>
+                            </div>
+                        </div>
+                        <div class="cart-footer">
+                            <div class="cart-total">
+                                <div class="cart-total-label">Total:</div>
+                                <div class="cart-total-price" id="cartTotal">$0.00</div>
+                            </div>
+                            <div class="cart-buttons">
+                                <button class="cart-btn cart-btn-view" id="viewCartBtn">Ver Carrito</button>
+                                <button class="cart-btn cart-btn-checkout" id="checkoutBtn">Pagar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Botón ir arriba -->
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- Página principal -->
+    <div id="main-page">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="img/video/live.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="container hero-content">
+                <h1>Descubre el Mundo Náutico</h1>
+                <p>Los mejores artículos náuticos y aventuras de calidad y variedad garantizadas.</p>
+                <button class="btn btn-primary" id="exploreBtn">Explorar Productos</button>
+            </div>
+        </section>
+
+        <!-- Productos destacados -->
+        <section class="featured-products">
+            <div class="container">
+                <h2 class="section-title">Productos Destacados</h2>
+                <div class="featured-grid">
+                    <div class="featured-product">
+                        <div class="featured-img">
+                            <img src="img/imagenes/tablasdesurf.jpg" alt="Tabla de Surf Pro" class="product-image">
+                        </div>
+                        <div class="featured-info">
+                            <div class="featured-name">Tabla de Surf Pro</div>
+                            <div class="featured-desc">Tabla profesional para surfistas experimentados. Diseño aerodinámico y materiales de alta calidad.</div>
+                            <div class="featured-price">$299.99</div>
+                            <button class="btn btn-primary featured-btn add-to-cart-btn" data-id="1" data-name="Tabla de Surf Pro" data-price="299.99" data-img="img/imagenes/tablasdesurf.jpg">Añadir al Carrito</button>
+                        </div>
+                    </div>
+                    <div class="featured-product">
+                        <div class="featured-img">
+                            <img src="img/imagenes/neopreno.jpg" alt="Traje de Neopreno" class="product-image">
+                        </div>
+                        <div class="featured-info">
+                            <div class="featured-name">Traje de Neopreno</div>
+                            <div class="featured-desc">Traje completo de neopreno de 3mm. Perfecto para aguas templadas y frías.</div>
+                            <div class="featured-price">$189.99</div>
+                            <button class="btn btn-primary featured-btn add-to-cart-btn" data-id="2" data-name="Traje de Neopreno" data-price="189.99" data-img="img/imagenes/neopreno.jpg">Añadir al Carrito</button>
+                        </div>
+                    </div>
+                    <div class="featured-product">
+                        <div class="featured-img">
+                            <img src="img/imagenes/chaleco.jpg" alt="Chaleco Salvavidas" class="product-image">
+                        </div>
+                        <div class="featured-info">
+                            <div class="featured-name">Chaleco Salvavidas</div>
+                            <div class="featured-desc">Chaleco salvavidas homologado. Máxima seguridad y comodidad para deportes acuáticos.</div>
+                            <div class="featured-price">$79.99</div>
+                            <button class="btn btn-primary featured-btn add-to-cart-btn" data-id="3" data-name="Chaleco Salvavidas" data-price="79.99" data-img="img/imagenes/chaleco.jpg">Añadir al Carrito</button>
+                        </div>
+                    </div>
+                    <div class="featured-product">
+                        <div class="featured-img">
+                            <img src="img/imagenes/brujula.jpg" alt="Brújula Náutica" class="product-image">
+                        </div>
+                        <div class="featured-info">
+                            <div class="featured-name">Brújula Náutica</div>
+                            <div class="featured-desc">Brújula profesional resistente al agua. Indispensable para la navegación segura.</div>
+                            <div class="featured-price">$49.99</div>
+                            <button class="btn btn-primary featured-btn add-to-cart-btn" data-id="4" data-name="Brújula Náutica" data-price="49.99" data-img="img/imagenes/brujula.jpg">Añadir al Carrito</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sobre Nosotros -->
+        <section class="about-us" id="about-us">
+            <div class="container">
+                <h2 class="section-title">Sobre Nosotros</h2>
+                <div class="about-content">
+                    <p>En Nauticshop somos una tienda dedicada al mundo náutico y los deportes acuáticos. Ofrecemos una amplia variedad de productos, desde tablas de wakeboard, kitesurf y surf, hasta accesorios y vestimenta especializada para acompañarte en cada aventura.</p>
+                    <p>Nuestro objetivo es brindar calidad, variedad y estilo a quienes disfrutan del mar y la vida al aire libre. Trabajamos para convertirnos en tu tienda náutica de confianza.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categorías -->
+        <section class="categories" id="categories">
+            <div class="container">
+                <h2 class="section-title">Nuestras Categorías</h2>
+                <div class="category-grid">
+                    <div class="category-card">
+                        <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1531722569936-825d3dd91b15?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                        <div class="category-info">
+                            <h3>Tablas</h3>
+                            <p>Tablas, botas, chalecos y accesorios para wakeboard y surf.</p>
+                            <button class="btn btn-primary category-btn" data-category="tablas">Ver Productos</button>
+                        </div>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-img" style="background-image: url('img/vestimentanautica/ropanautica.webp');"></div>
+                        <div class="category-info">
+                            <h3>Vestimenta</h3>
+                            <p>Ropa técnica, trajes de neopreno, chalecos salvavidas y accesorios para navegantes.</p>
+                            <button class="btn btn-primary category-btn" data-category="vestimenta">Ver Productos</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contacto -->
+        <section class="contact" id="contact">
+            <div class="container">
+                <h2 class="section-title">Contacto</h2>
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h3>Información de Contacto</h3>
+                        <div class="contact-info-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <p><strong>Dirección:</strong></p>
+                                <p>Av. del Puerto 123, Ciudad Costera</p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <p><strong>Teléfono:</strong></p>
+                                <p>+54 11 3582-4819</p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <p><strong>Email:</strong></p>
+                                <p>Ramiroalejoalvarez08@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-text">
+                                <p><strong>Horario:</strong></p>
+                                <p>Lunes a Viernes 9:00 - 20:00</p>
+                                <p>Sábados 10:00 - 14:00</p>
+                            </div>
+                        </div>
+                        <div class="social-links">                           
+                            <a href="https://www.instagram.com/nauticc.shop" title="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://wa.me/541135824819" title="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                    <div class="contact-form">
+                        <h3>Envíanos un Mensaje</h3>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name"><i class="fas fa-user"></i> Nombre</label>
+                                <input type="text" id="name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                                <input type="email" id="email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject"><i class="fas fa-tag"></i> Asunto</label>
+                                <input type="text" id="subject" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message"><i class="fas fa-comment-alt"></i> Mensaje</label>
+                                <textarea id="message" class="form-control" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="sendMessageBtn"><i class="fas fa-paper-plane"></i> Enviar Mensaje</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Página de productos: Tablas -->
+    <div id="tablas-page" class="product-page">
+        <div class="container">
+            <a href="#" class="back-btn" id="back-from-tablas"><i class="fas fa-arrow-left"></i> Volver a categorías</a>
+            <h2 class="section-title">Tablas y Equipamiento</h2>
+            
+            <div class="tablas-grid">
+                <!-- Esquíes Acuáticos -->
+                <div class="tabla-card" data-category="esquies">
+                    <div class="tabla-badge">Popular</div>
+                    <div class="tabla-img" style="background-image: url('img/portadas/1.jpg');"></div>
+                    <div class="tabla-content">
+                        <h3 class="tabla-title">Esquíes Acuáticos</h3>
+                        <p class="tabla-desc">Esquíes de alta calidad para deslizarte sobre el agua con máxima estabilidad.</p>
+                        <button class="tabla-btn">Ver Productos</button>
+                    </div>
+                </div>
+                
+                <!-- Wakeboard -->
+                <div class="tabla-card" data-category="wakeboard">
+                    <div class="tabla-img" style="background-image: url('img/portadas/2.jpg');"></div>
+                    <div class="tabla-content">
+                        <h3 class="tabla-title">Wakeboard</h3>
+                        <p class="tabla-desc">Tablas de wakeboard para principiantes y profesionales con diseños exclusivos.</p>
+                        <button class="tabla-btn">Ver Productos</button>
+                    </div>
+                </div>
+                
+                <!-- Surf -->
+                <div class="tabla-card" data-category="surf">
+                    <div class="tabla-badge">Oferta</div>
+                    <div class="tabla-img" style="background-image: url('img/portadas/3.jpg');"></div>
+                    <div class="tabla-content">
+                        <h3 class="tabla-title">Surf</h3>
+                        <p class="tabla-desc">Tablas de surf para todos los niveles, desde principiantes hasta expertos.</p>
+                        <button class="tabla-btn">Ver Productos</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Página de productos: Vestimenta -->
+    <div id="vestimenta-page" class="product-page">
+        <div class="container">
+            <a href="#" class="back-btn" id="back-from-vestimenta"><i class="fas fa-arrow-left"></i> Volver a categorías</a>
+            <h2 class="section-title">Vestimenta Náutica</h2>
+            
+            <div class="vestimenta-grid">
+                <!-- Trajes de Neopreno -->
+                <div class="vestimenta-card" data-category="neopreno">
+                    <div class="vestimenta-badge">Popular</div>
+                    <div class="vestimenta-img" style="background-image: url('img/vestimentanautica/0-2.jpg');"></div>
+                    <div class="vestimenta-content">
+                        <h3 class="vestimenta-title">Trajes de Neopreno</h3>
+                        <p class="vestimenta-desc">Trajes completos, shorties y tops de neopreno para diferentes temperaturas del agua.</p>
+                        <button class="vestimenta-btn">Ver Productos</button>
+                    </div>
+                </div>
+                
+                <!-- Chalecos Salvavidas -->
+                <div class="vestimenta-card" data-category="chalecos">
+                    <div class="vestimenta-img" style="background-image: url('img/vestimentanautica/0-1.jpg');"></div>
+                    <div class="vestimenta-content">
+                        <h3 class="vestimenta-title">Chalecos Salvavidas</h3>
+                        <p class="vestimenta-desc">Chalecos homologados para diferentes deportes acuáticos con máxima seguridad y comodidad.</p>
+                        <button class="vestimenta-btn">Ver Productos</button>
+                    </div>
+                </div>
+                
+                <!-- Chalecos -->
+                <div class="vestimenta-card" data-category="chalecos-nauticos">
+                    <div class="vestimenta-badge">Nuevo</div>
+                    <div class="vestimenta-img" style="background-image: url('img/vestimentanautica/0-3.jpg');"></div>
+                    <div class="vestimenta-content">
+                        <h3 class="vestimenta-title">Chalecos</h3>
+                        <p class="vestimenta-desc">Chalecos náuticos para navegación y actividades acuáticas.</p>
+                        <button class="vestimenta-btn">Ver Productos</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modales de productos para tablas -->
+    <!-- Modal Esquíes Acuáticos -->
+    <div id="esquies-modal" class="product-modal">
+        <div class="product-modal-content">
+            <div class="product-modal-header">
+                <h2 class="product-modal-title">Esquíes Acuáticos</h2>
+                <button class="product-modal-close">&times;</button>
+            </div>
+            <div class="product-modal-body">
+                <div class="product-modal-grid">
+                    <div class="modal-product-card">
+                        <div class="modal-product-img">
+                            <img src="img/vestimentanautica/5.jpg" alt="Esquí Acuático Pro">
+                        </div>
+                        <div class="modal-product-info">
+                            <h3 class="modal-product-name">Esquí Acuático Pro</h3>
+                            <p class="modal-product-desc">Esquí de competición con diseño aerodinámico para máxima velocidad.</p>
+                            <div class="modal-product-price">$349.99</div>
+                            <button class="modal-product-btn add-to-cart-btn" data-id="11" data-name="Esquí Acuático Pro" data-price="349.99" data-img="img/vestimentanautica/5.jpg">Añadir al carrito</button>
+                            <div class="modal-product-features">
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Material de fibra de carbono</div>
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Peso ligero: 2.5kg</div>
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Incluye fijaciones ajustables</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-product-card">
+                        <div class="modal-product-img">
+                            <img src="img/vestimentanautica/4.jpg" alt="Esquí Combo Junior">
+                        </div>
+                        <div class="modal-product-info">
+                            <h3 class="modal-product-name">Esquí Combo Junior</h3>
+                            <p class="modal-product-desc">Esquí combinado ideal para niños y adolescentes que se inician en este deporte.</p>
+                            <div class="modal-product-price">$199.99</div>
+                            <button class="modal-product-btn add-to-cart-btn" data-id="12" data-name="Esquí Combo Junior" data-price="199.99" data-img="img/vestimentanautica/4.jpg">Añadir al carrito</button>
+                            <div class="modal-product-features">
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Material resistente y duradero</div>
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Fijaciones ajustables para crecimiento</div>
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Diseño estable para aprendizaje</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Wakeboard -->
+    <div id="wakeboard-modal" class="product-modal">
+        <div class="product-modal-content">
+            <div class="product-modal-header">
+                <h2 class="product-modal-title">Wakeboard</h2>
+                <button class="product-modal-close">&times;</button>
+            </div>
+            <div class="product-modal-body">
+                <div class="product-modal-grid">
+                    <div class="modal-product-card">
+                        <div class="modal-product-img">
+                            <img src="img/vestimentanautica/wake1.jpg" alt="Wakeboard Freestyle">
+                        </div>
+                        <div class="modal-product-info">
+                            <h3 class="modal-product-name">Wakeboard Freestyle</h3>
+                            <p class="modal-product-desc">Tabla versátil para trucos y saltos con gran estabilidad y control.</p>
+                            <div class="modal-product-price">$299.99</div>
+                            <button class="modal-product-btn add-to-cart-btn" data-id="13" data-name="Wakeboard Freestyle" data-price="299.99" data-img="img/vestimentanautica/wake1.jpg">Añadir al carrito</button>
+                            <div class="modal-product-features">
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Perfil continuo para suavidad</div>
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Quillas moldeadas para mejor agarre</div>
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Longitud: 138cm</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-product-card">
+                        <div class="modal-product-img">
+                            <img src="img/vestimentanautica/wake2.jpg" alt="Wakeboard Pro Series">
+                        </div>
+                        <div class="modal-product-info">
+                            <h3 class="modal-product-name">Wakeboard Pro Series</h3>
+                            <p class="modal-product-desc">Tabla de competición con tecnología avanzada para riders experimentados.</p>
+                            <div class="modal-product-price">$449.99</div>
+                            <button class="modal-product-btn add-to-cart-btn" data-id="14" data-name="Wakeboard Pro Series" data-price="449.99" data-img="img/vestimentanautica/wake2.jpg">Añadir al carrito</button>
+                            <div class="modal-product-features">
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Núcleo de madera laminada</div>
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Sistema de quillas intercambiables</div>
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Perfil de 3 etapas para máximo pop</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Surf -->
+    <div id="surf-modal" class="product-modal">
+        <div class="product-modal-content">
+            <div class="product-modal-header">
+                <h2 class="product-modal-title">Surf</h2>
+                <button class="product-modal-close">&times;</button>
+            </div>
+            <div class="product-modal-body">
+                <div class="product-modal-grid">
+                    <div class="modal-product-card">
+                        <div class="modal-product-img">
+                            <img src="img/vestimentanautica/surf1.jpg" alt="Tabla Longboard">
+                        </div>
+                        <div class="modal-product-info">
+                            <h3 class="modal-product-name">Tabla Longboard</h3>
+                            <p class="modal-product-desc">Longboard clásico de 9' ideal para principiantes y surfistas de estilo tradicional.</p>
+                            <div class="modal-product-price">$599.99</div>
+                            <button class="modal-product-btn add-to-cart-btn" data-id="15" data-name="Tabla Longboard" data-price="599.99" data-img="img/vestimentanautica/surf1.jpg">Añadir al carrito</button>
+                            <div class="modal-product-features">
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Longitud: 9'0"</div>
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Construcción epoxy con refuerzo</div>
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Incluye quilla central y laterales</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-product-card">
+                        <div class="modal-product-img">
+                            <img src="img/vestimentanautica/surf2.jpg" alt="Tabla Shortboard">
+                        </div>
+                        <div class="modal-product-info">
+                            <h3 class="modal-product-name">Tabla Shortboard</h3>
+                            <p class="modal-product-desc">Shortboard de alto rendimiento para surfistas avanzados que buscan radicalidad.</p>
+                            <div class="modal-product-price">$549.99</div>
+                            <button class="modal-product-btn add-to-cart-btn" data-id="16" data-name="Tabla Shortboard" data-price="549.99" data-img="img/vestimentanautica/surf2.jpg">Añadir al carrito</button>
+                            <div class="modal-product-features">
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Longitud: 6'2"</div>
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Rocker pronunciado para giros</div>
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Sistema de 3 quillas FCS II</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modales de productos para vestimenta -->
+    <!-- Modal Trajes de Neopreno -->
+    <div id="neopreno-modal" class="product-modal">
+        <div class="product-modal-content">
+            <div class="product-modal-header">
+                <h2 class="product-modal-title">Trajes de Neopreno</h2>
+                <button class="product-modal-close">&times;</button>
+            </div>
+            <div class="product-modal-body">
+                <div class="product-modal-grid">
+                    <div class="modal-product-card">
+                        <div class="modal-product-img">
+                            <img src="img/vestimentanautica/foto1.jpg" alt="Traje Neopreno 3/2mm">
+                        </div>
+                        <div class="modal-product-info">
+                            <h3 class="modal-product-name">Traje Neopreno 3/2mm</h3>
+                            <p class="modal-product-desc">Traje completo de neopreno para aguas templadas, con costuras selladas y cremallera dorsal.</p>
+                            <div class="modal-product-price">$189.99</div>
+                            <button class="modal-product-btn add-to-cart-btn" data-id="17" data-name="Traje Neopreno 3/2mm" data-price="189.99" data-img="img/vestimentanautica/foto1.jpg">Añadir al carrito</button>
+                            <div class="modal-product-features">
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Grosor: 3/2mm</div>
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Costuras selladas GBS</div>
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Neopreno elástico en 4 direcciones</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-product-card">
+                        <div class="modal-product-img">
+                            <img src="img/vestimentanautica/foto2.jpg" alt="Shorty 2mm">
+                        </div>
+                        <div class="modal-product-info">
+                            <h3 class="modal-product-name">Shorty 2mm</h3>
+                            <p class="modal-product-desc">Traje corto de neopreno para aguas cálidas, ideal para deportes acuáticos en verano.</p>
+                            <div class="modal-product-price">$99.99</div>
+                            <button class="modal-product-btn add-to-cart-btn" data-id="18" data-name="Shorty 2mm" data-price="99.99" data-img="img/vestimentanautica/foto2.jpg">Añadir al carrito</button>
+                            <div class="modal-product-features">
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Grosor: 2mm</div>
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Cremallera frontal</div>
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Protección UV</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Chalecos Salvavidas -->
+    <div id="chalecos-modal" class="product-modal">
+        <div class="product-modal-content">
+            <div class="product-modal-header">
+                <h2 class="product-modal-title">Chalecos Salvavidas</h2>
+                <button class="product-modal-close">&times;</button>
+            </div>
+            <div class="product-modal-body">
+                <div class="product-modal-grid">
+                    <div class="modal-product-card">
+                        <div class="modal-product-img">
+                            <img src="img/vestimentanautica/chaleco1.jpg" alt="Chaleco Salvavidas Pro">
+                        </div>
+                        <div class="modal-product-info">
+                            <h3 class="modal-product-name">Chaleco Salvavidas Pro</h3>
+                            <p class="modal-product-desc">Chaleco salvavidas homologado para deportes acuáticos de alta intensidad.</p>
+                            <div class="modal-product-price">$89.99</div>
+                            <button class="modal-product-btn add-to-cart-btn" data-id="19" data-name="Chaleco Salvavidas Pro" data-price="89.99" data-img="img/vestimentanautica/chaleco1.jpg">Añadir al carrito</button>
+                            <div class="modal-product-features">
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Homologación ISO 12402-5</div>
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Espuma de flotación segmentada</div>
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Ajustes laterales y en hombros</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-product-card">
+                        <div class="modal-product-img">
+                            <img src="img/vestimentanautica/chaleco2.jpg" alt="Chaleco Salvavidas Junior">
+                        </div>
+                        <div class="modal-product-info">
+                            <h3 class="modal-product-name">Chaleco Salvavidas Junior</h3>
+                            <p class="modal-product-desc">Chaleco salvavidas diseñado específicamente para niños, con máxima seguridad y visibilidad.</p>
+                            <div class="modal-product-price">$69.99</div>
+                            <button class="modal-product-btn add-to-cart-btn" data-id="20" data-name="Chaleco Salvavidas Junior" data-price="69.99" data-img="img/vestimentanautica/chaleco2.jpg">Añadir al carrito</button>
+                            <div class="modal-product-features">
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Para niños de 30-50kg</div>
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Colores de alta visibilidad</div>
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Incluye silbato de emergencia</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Chalecos Náuticos -->
+    <div id="chalecos-nauticos-modal" class="product-modal">
+        <div class="product-modal-content">
+            <div class="product-modal-header">
+                <h2 class="product-modal-title">Chalecos</h2>
+                <button class="product-modal-close">&times;</button>
+            </div>
+            <div class="product-modal-body">
+                <div class="product-modal-grid">
+                    <div class="modal-product-card">
+                        <div class="modal-product-img">
+                            <img src="img/vestimentanautica/nautico1.jpg" alt="Chaleco Náutico Deportivo">
+                        </div>
+                        <div class="modal-product-info">
+                            <h3 class="modal-product-name">Chaleco Náutico Deportivo</h3>
+                            <p class="modal-product-desc">Chaleco ligero y cómodo para actividades náuticas, con bolsillos y protección contra salpicaduras.</p>
+                            <div class="modal-product-price">$79.99</div>
+                            <button class="modal-product-btn add-to-cart-btn" data-id="21" data-name="Chaleco Náutico Deportivo" data-price="79.99" data-img="img/vestimentanautica/nautico1.jpg">Añadir al carrito</button>
+                            <div class="modal-product-features">
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Material repelente al agua</div>
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Múltiples bolsillos con cierre</div>
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Secado rápido</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-product-card">
+                        <div class="modal-product-img">
+                            <img src="img/vestimentanautica/nautico2.jpg" alt="Chaleco Técnico Navegación">
+                        </div>
+                        <div class="modal-product-info">
+                            <h3 class="modal-product-name">Chaleco Técnico Navegación</h3>
+                            <p class="modal-product-desc">Chaleco técnico con múltiples bolsillos y características específicas para navegantes.</p>
+                            <div class="modal-product-price">$99.99</div>
+                            <button class="modal-product-btn add-to-cart-btn" data-id="22" data-name="Chaleco Técnico Navegación" data-price="99.99" data-img="img/vestimentanautica/nautico2.jpg">Añadir al carrito</button>
+                            <div class="modal-product-features">
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Tejido resistente al agua y viento</div>
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Bolsillos especializados para equipamiento</div>
+                                <div class="modal-product-feature"><i class="fas fa-check-circle"></i> Reflectantes de seguridad</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-main">
+                <div>
+                    <div class="footer-logo">Nautic<span>shop</span></div>
+                    <p class="footer-about">Somos tu tienda náutica de confianza. Ofrecemos productos de calidad para todos los amantes del mar y los deportes acuáticos.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/nauticc.shop" title="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="footer-title">Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#about-us">Sobre Nosotros</a></li>
+                        <li><a href="#categories">Categorías</a></li>
+                        <li><a href="#contact">Contacto</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Preguntas Frecuentes</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-title">Categorías</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" class="footer-category" data-category="tablas">Tablas</a></li>
+                        <li><a href="#" class="footer-category" data-category="vestimenta">Vestimenta</a></li>
+                        <li><a href="#">Accesorios</a></li>
+                        <li><a href="#">Novedades</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-title">Contacto</h3>
+                    <div class="footer-contact-item">
+                        <div class="footer-contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="footer-contact-text">
+                            Av. del Puerto 123, Ciudad Costera
+                        </div>
+                    </div>
+                    <div class="footer-contact-item">
+                        <div class="footer-contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="footer-contact-text">
+                            +54 11 3582-4819
+                        </div>
+                    </div>
+                    <div class="footer-contact-item">
+                        <div class="footer-contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="footer-contact-text">
+                            Ramiroalejoalvarez08@gmail.com
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Nauticshop - Todos los derechos reservados | Diseñado con <i class="fas fa-heart"></i> para amantes del mar</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modales de login y registro -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Iniciar Sesión</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="loginEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword"><i class="fas fa-lock"></i> Contraseña</label>
+                    <input type="password" id="loginPassword" class="form-control" required>
+                </div>
+                <div class="form-footer">
+                    <button type="submit" class="btn btn-primary" id="submitLoginBtn"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</button>
+                    <p>¿No tienes cuenta? <a href="#" id="showRegisterBtn">Regístrate</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Crear Cuenta</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerName"><i class="fas fa-user"></i> Nombre</label>
+                    <input type="text" id="registerName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="registerEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword"><i class="fas fa-lock"></i> Contraseña</label>
+                    <input type="password" id="registerPassword" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerConfirmPassword"><i class="fas fa-lock"></i> Confirmar Contraseña</label>
+                    <input type="password" id="registerConfirmPassword" class="form-control" required>
+                </div>
+                <div class="form-footer">
+                    <button type="submit" class="btn btn-primary" id="submitRegisterBtn"><i class="fas fa-user-plus"></i> Crear Cuenta</button>
+                    <p>¿Ya tienes cuenta? <a href="#" id="showLoginBtn">Inicia Sesión</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Vista completa del carrito -->
+    <div class="cart-page-modal" id="cartPageModal">
+        <div class="cart-page-content">
+            <div class="cart-page-header">
+                <h2 class="cart-page-title">Tu Carrito de Compras</h2>
+                <button class="cart-page-close">&times;</button>
+            </div>
+            <div class="cart-page-body">
+                <table class="cart-page-table">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Subtotal</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="cartPageItems">
+                        <!-- Los items del carrito se generarán dinámicamente con JS -->
+                    </tbody>
+                </table>
+                
+                <div class="cart-page-footer">
+                    <div class="cart-page-coupon">
+                        <h3 class="cart-page-coupon-title">Cupón de Descuento</h3>
+                        <div class="cart-page-coupon-form">
+                            <input type="text" class="cart-page-coupon-input" placeholder="Código de cupón">
+                            <button class="cart-page-coupon-btn">Aplicar</button>
+                        </div>
+                        <a href="#" class="cart-page-continue" id="continueShopping"><i class="fas fa-arrow-left"></i> Continuar comprando</a>
+                    </div>
+                    <div class="cart-page-totals">
+                        <h3 class="cart-page-totals-title">Resumen del Carrito</h3>
+                        <div class="cart-page-totals-row">
+                            <div class="cart-page-totals-label">Subtotal</div>
+                            <div class="cart-page-totals-value" id="cartPageSubtotal">$0.00</div>
+                        </div>
+                        <div class="cart-page-totals-row">
+                            <div class="cart-page-totals-label">Envío</div>
+                            <div class="cart-page-totals-value">$10.00</div>
+                        </div>
+                        <div class="cart-page-totals-row">
+                            <div class="cart-page-totals-label">Total</div>
+                            <div class="cart-page-totals-value" id="cartPageTotal">$0.00</div>
+                        </div>
+                        <button class="cart-page-checkout-btn" id="cartPageCheckoutBtn">Proceder al Pago</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Proceso de pago -->
+    <div class="checkout-modal" id="checkoutModal">
+        <div class="checkout-content">
+            <div class="checkout-header">
+                <h2 class="checkout-title">Proceso de Pago</h2>
+                <button class="checkout-close">&times;</button>
+            </div>
+            <div class="checkout-body">
+                <div class="checkout-steps">
+                    <div class="checkout-step active" id="step1">
+                        <div class="step-number">1</div>
+                        <div class="step-text">Información de Envío</div>
+                    </div>
+                    <div class="checkout-step" id="step2">
+                        <div class="step-number">2</div>
+                        <div class="step-text">Método de Pago</div>
+                    </div>
+                    <div class="checkout-step" id="step3">
+                        <div class="step-number">3</div>
+                        <div class="step-text">Confirmación</div>
+                    </div>
+                </div>
+                
+                <div class="checkout-section active" id="section1">
+                    <h3 class="checkout-section-title">Información de Envío</h3>
+                    
+                    <div class="checkout-cart-summary">
+                        <h4>Resumen del Pedido</h4>
+                        <div id="checkoutCartItems">
+                            <!-- Los items del carrito se generarán dinámicamente con JS -->
+                        </div>
+                        <div class="summary-total">
+                            <div>Total</div>
+                            <div id="checkoutTotal">$0.00</div>
+                        </div>
+                    </div>
+                    
+                    <form id="shippingForm">
+                        <div class="checkout-form-row">
+                            <div class="checkout-form-col">
+                                <div class="checkout-form-group">
+                                    <label for="firstName">Nombre</label>
+                                    <input type="text" id="firstName" class="checkout-form-control" required>
+                                </div>
+                            </div>
+                            <div class="checkout-form-col">
+                                <div class="checkout-form-group">
+                                    <label for="lastName">Apellido</label>
+                                    <input type="text" id="lastName" class="checkout-form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="checkout-form-group">
+                            <label for="emailCheckout">Email</label>
+                            <input type="email" id="emailCheckout" class="checkout-form-control" required>
+                        </div>
+                        
+                        <div class="checkout-form-group">
+                            <label for="phone">Teléfono</label>
+                            <input type="tel" id="phone" class="checkout-form-control" required>
+                        </div>
+                        
+                        <div class="checkout-form-group">
+                            <label for="address">Dirección</label>
+                            <input type="text" id="address" class="checkout-form-control" required>
+                        </div>
+                        
+                        <div class="checkout-form-row">
+                            <div class="checkout-form-col">
+                                <div class="checkout-form-group">
+                                    <label for="city">Ciudad</label>
+                                    <input type="text" id="city" class="checkout-form-control" required>
+                                </div>
+                            </div>
+                            <div class="checkout-form-col">
+                                <div class="checkout-form-group">
+                                    <label for="postalCode">Código Postal</label>
+                                    <input type="text" id="postalCode" class="checkout-form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="checkout-form-group">
+                            <label for="country">País</label>
+                            <select id="country" class="checkout-form-control" required>
+                                <option value="">Seleccionar país</option>
+                                <option value="AR">Argentina</option>
+                                <option value="CL">Chile</option>
+                                <option value="CO">Colombia</option>
+                                <option value="MX">México</option>
+                                <option value="ES">España</option>
+                                <option value="US">Estados Unidos</option>
+                                <option value="OT">Otro</option>
+                            </select>
+                        </div>
+                        
+                        <div class="checkout-form-group">
+                            <label for="shippingNotes">Notas de Envío (opcional)</label>
+                            <textarea id="shippingNotes" class="checkout-form-control" rows="3"></textarea>
+                        </div>
+                    </form>
+                    
+                    <div class="checkout-actions">
+                        <button class="checkout-btn checkout-btn-back" id="backToCart">Volver al Carrito</button>
+                        <button class="checkout-btn checkout-btn-next" id="goToPayment">Continuar al Pago</button>
+                    </div>
+                </div>
+                
+                <div class="checkout-section" id="section2">
+                    <h3 class="checkout-section-title">Método de Pago</h3>
+                    
+                    <div class="payment-methods">
+                        <div class="payment-method" data-method="credit-card">
+                            <div class="payment-method-icon">
+                                <i class="far fa-credit-card"></i>
+                            </div>
+                            <div class="payment-method-name">Tarjeta de Crédito</div>
+                        </div>
+                        <div class="payment-method" data-method="debit-card">
+                            <div class="payment-method-icon">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div class="payment-method-name">Tarjeta de Débito</div>
+                        </div>
+                        <div class="payment-method" data-method="paypal">
+                            <div class="payment-method-icon">
+                                <i class="fab fa-paypal"></i>
+                            </div>
+                            <div class="payment-method-name">PayPal</div>
+                        </div>
+                        <div class="payment-method" data-method="bank-transfer">
+                            <div class="payment-method-icon">
+                                <i class="fas fa-university"></i>
+                            </div>
+                            <div class="payment-method-name">Transferencia Bancaria</div>
+                        </div>
+                    </div>
+
+                    <form id="paymentForm" class="credit-card-form">
+                        <div class="checkout-form-group">
+                            <label for="card-element">Tarjeta de Crédito o Débito</label>
+                            <div id="card-element" class="checkout-form-control">
+                                <!-- Stripe Elements se montará aquí -->
+                            </div>
+                            <!-- Usado para mostrar errores de Stripe -->
+                            <div id="card-errors" role="alert" class="stripe-error"></div>
+                        </div>
+                    </form>
+
+                    <div class="checkout-actions">
+                        <button type="button" class="checkout-btn checkout-btn-back" id="backToShipping">Volver a Envío</button>
+                        <button type="button" class="checkout-btn checkout-btn-submit" id="completeOrder">Completar Pedido</button>
+                    </div>
+                </div>
+
+                <div class="checkout-section" id="section3">
+                    <div class="order-confirmation">
+                        <div class="confirmation-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h3 class="confirmation-title">¡Pedido Confirmado!</h3>
+                        <p class="confirmation-message">
+                            Tu pedido ha sido procesado exitosamente. Recibirás un email de confirmación con los detalles de tu compra y el seguimiento del envío.
+                        </p>
+                        
+                        <div class="order-details">
+                            <div class="order-detail-item">
+                                <div class="order-detail-label">Número de Pedido:</div>
+                                <div class="order-detail-value" id="orderNumber">NS-1234</div>
+                            </div>
+                            <div class="order-detail-item">
+                                <div class="order-detail-label">Fecha:</div>
+                                <div class="order-detail-value" id="orderDate">01/01/2025</div>
+                            </div>
+                            <div class="order-detail-item">
+                                <div class="order-detail-label">Total:</div>
+                                <div class="order-detail-value" id="orderTotal">$0.00</div>
+                            </div>
+                            <div class="order-detail-item">
+                                <div class="order-detail-label">Método de Pago:</div>
+                                <div class="order-detail-value" id="orderPaymentMethod">Tarjeta de Crédito</div>
+                            </div>
+                        </div>
+                        
+                        <a href="#" class="checkout-btn-continue" id="continueShopping2">Continuar Comprando</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Animación de carga -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Procesando tu pedido...</div>
+    </div>
+
+    <!-- Preload de recursos críticos -->
+    <link rel="preload" as="font" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600;700&display=swap" crossorigin>
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Lazy load para imágenes -->
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const images = document.querySelectorAll('img[data-src]');
+        const imageOptions = {
+            threshold: 0,
+            rootMargin: "0px 0px 50px 0px"
+        };
+
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.classList.add('fade-in');
+                    observer.unobserve(img);
+                }
+            });
+        }, imageOptions);
+
+        images.forEach(img => imageObserver.observe(img));
+    });
+    </script>
+
+    <!-- Optimización de rendimiento -->
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Optimización del scroll
+        let ticking = false;
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                window.requestAnimationFrame(function() {
+                    // Actualizar elementos basados en scroll
+                    const header = document.getElementById('header');
+                    if (window.scrollY > 100) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // Optimización de animaciones
+        const animatedElements = document.querySelectorAll('.featured-product, .category-card, .vestimenta-card');
+        const animationOptions = {
+            threshold: 0.1,
+            rootMargin: "0px"
+        };
+
+        const animationObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, animationOptions);
+
+        animatedElements.forEach(el => animationObserver.observe(el));
+
+        // Optimización del carrito
+        const cartBtn = document.getElementById('cartIcon');
+        const cartDropdown = document.getElementById('cartDropdown');
+        let cartTimeout;
+
+        cartBtn.addEventListener('mouseenter', () => {
+            clearTimeout(cartTimeout);
+            cartDropdown.classList.add('active');
+        });
+
+        cartBtn.addEventListener('mouseleave', () => {
+            cartTimeout = setTimeout(() => {
+                cartDropdown.classList.remove('active');
+            }, 300);
+        });
+    });
+    </script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Obtener todos los enlaces del menú
+        const menuLinks = document.querySelectorAll('nav ul li a, .footer-links a');
+        
+        menuLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Solo para enlaces que apuntan a secciones internas
+                const href = this.getAttribute('href');
+                if (href.startsWith('#') && href !== '#') {
+                    e.preventDefault();
+                    
+                    const targetId = href.substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    
+                    if (targetSection) {
+                        // Calcular la posición considerando el header fijo
+                        const headerHeight = document.getElementById('header').offsetHeight;
+                        const targetPosition = targetSection.offsetTop - headerHeight;
+                        
+                        // Animación suave
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Actualizar clase active
+                        menuLinks.forEach(link => link.classList.remove('active'));
+                        this.classList.add('active');
+                    }
+                }
+            });
+        });
+
+        // Detectar sección activa durante el scroll
+        let sections = document.querySelectorAll('section[id]');
+        
+        function highlightCurrentSection() {
+            const scrollY = window.pageYOffset;
+            const headerHeight = document.getElementById('header').offsetHeight;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - headerHeight - 100; // Margen de 100px
+                const sectionBottom = sectionTop + section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollY >= sectionTop && scrollY < sectionBottom) {
+                    menuLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + sectionId) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', highlightCurrentSection);
+    });
+    </script>
+
+    <script src="stripe-config.js"></script>
+    <script src="script.js"></script>
+    <script src="animations.js"></script>
+    <script src="image-optimization.js"></script>
+</body>
+</html>
+
